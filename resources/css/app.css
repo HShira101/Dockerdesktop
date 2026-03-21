@@ -1,0 +1,161 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* 
+   Ejemplo: Así puedes crear tus propias clases tradicionales y mantenerlas en ESTE único archivo, 
+   aprovechando el poder de Tailwind por debajo usando @apply 
+*/
+
+aside {
+    /*--Navegador lateral--*/
+    @apply
+    /*Ancho con parametro fijo*/
+    w-64
+    /*Color de fondo formato Tailwing css, buscar en google paleta para ver colores*/
+    bg-sky-800
+    /*Dibuja una linea de borde en el lado derecho (r)*/
+    border-r
+    /*Color de la linea*/
+    border-sky-900
+    /*Activa el flexbox en columna*/
+    flex flex-col
+    /*Transiciones suaves*/
+    transition-all duration-300
+    /*Sombra*/
+    shadow-2xl z-20;
+}
+
+.logocont {
+    /*-- Contenedor del logo --*/
+    @apply
+    /*Alto fijo (height)*/
+    h-16
+    /*Activa el formato flexbox*/
+    flex
+    /*Centra verticalmente los elementos internos*/
+    items-center
+    /*Relleno o padding en el eje X (izquierda y derecha)*/
+    px-6
+    /*Dibuja una linea de borde solo en la parte inferior (bottom)*/
+    border-b
+    /*Color del borde inferior con un 60% de opacidad*/
+    border-sky-800/60
+    /*Color oscuro de fondo*/
+    bg-sky-900;
+}
+
+.boton-nav {
+    @apply
+    /*Color de fondo*/
+    bg-sky-900
+    /*Color del texto*/
+    text-white
+    /*Relleno o padding en el eje X (izquierda y derecha)*/
+    px-6
+    /*Relleno o padding en el eje Y (arriba y abajo)*/
+    py-6
+    /*Transiciones suaves*/
+    transition-all duration-300
+    /*Sombra*/
+    shadow-2xl z-20
+    /* Ocupa todo el ancho */
+    w-full
+    /*- Agrega margen inferior y superior -*/
+    mb-2 mt-2
+    /*- Agrega suavizado del botón -*/
+    rounded-lg
+    /*- Agrega color al pasar por encima -*/
+    hover:bg-sky-700
+    /*- Agrega color al hacer click -*/
+    active:bg-sky-600;
+}
+
+header {
+    /*-- Barra Superior (Topbar) --*/
+    @apply
+    /*Alto fijo*/
+    h-16
+    /*Color de fondo*/
+    bg-white
+    /*Borde inferior*/
+    border-b
+    /*Color del borde*/
+    border-slate-200
+    /*Sombra pequeña*/
+    shadow-sm
+    /*Activa el formato flexbox*/
+    flex
+    /*Centra verticalmente los elementos internos*/
+    items-center
+    /*Distribuye los elementos: uno a la izquierda y otro a la derecha*/
+    justify-between
+    /*Relleno o padding en el eje X (izquierda y derecha)*/
+    px-8
+    /*Z-index para que flote sobre el contenido*/
+    z-10
+    /*Evita que se comprima o encoja*/
+    shrink-0;
+}
+
+/* -- ESTILOS PARA LAS TARJETAS DE CONTENEDORES -- */
+
+.caja-de-tarjetas {
+    @apply
+    /* Grid layout */
+    grid
+    /* Una columna en móviles, 2 en tablets, 3 en escritorio grande */
+    grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+    /* Espaciado entre tarjetas */
+    gap-6
+    /* Margen superior para separarlo del título */
+    mt-6;
+}
+
+.tarjeta {
+    @apply
+    /* Fondo blanco */
+    bg-gray-100
+    /* Bordes redondeados grandecitos */
+    rounded-xl
+    /* Sombra media */
+    shadow-md
+    /* Borde gris clarito */
+    border border-slate-50
+    /* Oculta contenido sobrante (esquinas) */
+    overflow-hidden
+    /* Efecto al pasar el mouse (hover) */
+    hover:shadow-lg hover:border-blue-300 hover:-translate-y-1
+    /* Transición suave para todos los efectos hover */
+    transition-all duration-300
+    /* Flex column para organizar su contenido interno */
+    flex flex-col;
+}
+
+.encabezado-tarjeta {
+    @apply
+    /* Padding horizontal y vertical */
+    px-6 py-4
+    /* Borde sutil por debajo para separar del cuerpo */
+    border-b border-slate-100
+    /* Flexbox para poner ícono/título a un lado y botón al otro */
+    flex items-center justify-between
+    /* Color de fondo sutilmente diferente al blanco (opcional) */
+    bg-slate-50;
+}
+
+.cuerpo-tarjeta {
+    @apply
+    /* Padding en todos lados */
+    p-1
+    /*- Flexbox y centrado de contenido-*/
+    flex flex-col;
+}
