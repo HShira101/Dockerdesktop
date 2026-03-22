@@ -28,10 +28,20 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . /var/www/html
 
+# Instalación de dependencias de PHP (Laravel)
+RUN composer install --no-interaction --optimize-autoloader --no-dev
+
 # Instalación de dependencias de Node.js y construcción de assets con Vite
 RUN npm install && npm run build
 
+# Preparar la base de datos SQLite y ejecutar migraciones
+# (Puesto que ahora se copia el .env, artisan entenderá la conexión de SQLite)
+RUN touch database/database.sqlite && php artisan migrate --force
+
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
-    && chmod -R 775 /var/www/html/bootstrap/cache
+    && chmod -R 775 /var/www/html/bootstrap/cache \
+    && chmod 775 /var/www/html/database \
+    && chmod 664 /var/www/html/database/database.sqlite
+    
 EXPOSE 80
