@@ -27,13 +27,49 @@ class DockerController extends Controller
                 return [
                     'nombre' => $datos['Names'] ?? 'Sin nombre',
                     'estado' => $datos['State'] ?? 'Desconocido',
-                    'id'     => $datos['ID'] ?? ''
+                    'id'     => $datos['ID'] ?? '',
+                    'creado' => $datos['CreatedAt'] ?? '',
+                    'puerto' => $datos['Ports'] ?? '',
+                    'network' => $datos['Networks'] ?? '',
+                    'ip' => $datos['IPAddress'] ?? ''
                 ];
             });
         }
 
         return view('contenedores', compact('lista'));
     }
+    // {---- Inicia un contenedor (recibe id y nombre desde el formulario de la tarjeta) ----}
+    public function iniciar(Request $request)
+    {
+        $id     = $request->input('id');     // {-- ← ID corto del contenedor --}
+        $nombre = $request->input('nombre'); // {-- ← nombre para mostrar en notificación --}
+
+        $resultado = Process::run("docker start $id"); // {-- ← ejecuta docker start en el host --}
+
+        if ($resultado->successful()) {
+            return redirect('/')->with('notificacion', ['accion' => 'encendido', 'nombre' => $nombre]);
+        }
+
+        return redirect('/')->with('notificacion', ['accion' => 'error', 'nombre' => $nombre]);
+    }
+    // {---- Fin Inicia un contenedor ----}
+
+    // {---- Para un contenedor (recibe id y nombre desde el formulario de la tarjeta) ----}
+    public function parar(Request $request)
+    {
+        $id     = $request->input('id');     // {-- ← ID corto del contenedor --}
+        $nombre = $request->input('nombre'); // {-- ← nombre para mostrar en notificación --}
+
+        $resultado = Process::run("docker stop $id"); // {-- ← ejecuta docker stop en el host --}
+
+        if ($resultado->successful()) {
+            return redirect('/')->with('notificacion', ['accion' => 'apagado', 'nombre' => $nombre]);
+        }
+
+        return redirect('/')->with('notificacion', ['accion' => 'error', 'nombre' => $nombre]);
+    }
+    // {---- Fin Para un contenedor ----}
+
     public function obtener_contenedores()
     { //Función para solicitar lista de contenedores.
         // Pide una lista de contendores a docker y otorga un formato JSON con los contenedores.

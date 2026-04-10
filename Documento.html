@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dockerdesktop — DEV 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; color: #1a1a1a; font-size: 14px; }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px;
+            padding: 20mm 20mm 15mm;
+            background: white;
+            box-shadow: 0 0 8px rgba(0,0,0,0.15);
+            page-break-after: always;
+        }
+
+        /* Portada */
+        .cover { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px; }
+        .cover h1 { font-size: 42px; font-weight: 800; letter-spacing: -1px; }
+        .cover .subtitle { font-size: 16px; color: #555; }
+        .cover .meta { margin-top: 40px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #777; }
+        .cover .meta span { background: #f4f4f4; padding: 6px 16px; border-radius: 20px; }
+        .cover .line { width: 60px; height: 4px; background: #2563eb; border-radius: 2px; }
+        .cover .dev-badge { background: #fef3c7; color: #b45309; font-weight: 700; padding: 6px 18px; border-radius: 20px; font-size: 13px; border: 1px solid #fcd34d; }
+
+        /* Índice */
+        .toc h2 { font-size: 22px; margin-bottom: 24px; border-bottom: 2px solid #2563eb; padding-bottom: 8px; }
+        .toc ol { padding-left: 20px; list-style: none; counter-reset: toc; }
+        .toc li { padding: 7px 0; border-bottom: 1px dotted #ddd; display: flex; justify-content: space-between; }
+        .toc li span { color: #999; }
+        .toc .sub { padding-left: 20px; font-size: 13px; color: #555; }
+
+        /* Secciones */
+        .section { margin-bottom: 32px; }
+        .section h2 { font-size: 20px; color: #2563eb; margin-bottom: 14px; border-left: 4px solid #2563eb; padding-left: 10px; }
+        .section h3 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; color: #333; }
+        .section p { line-height: 1.7; color: #444; margin-bottom: 10px; }
+        .section ul, .section ol { padding-left: 20px; line-height: 2; color: #444; }
+
+        /* Tablas */
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+        th { background: #2563eb; color: white; padding: 8px 12px; text-align: left; }
+        td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+        tr:nth-child(even) td { background: #f9f9f9; }
+
+        /* Código */
+        code { background: #f1f5f9; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 12px; }
+        pre { background: #1e293b; color: #e2e8f0; padding: 14px; border-radius: 6px; font-family: monospace; font-size: 12px; line-height: 1.6; overflow-x: auto; margin: 10px 0; }
+
+        /* Badges */
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; margin: 2px; }
+        .badge-blue { background: #dbeafe; color: #1d4ed8; }
+        .badge-green { background: #dcfce7; color: #15803d; }
+
+        /* Nota */
+        .note { background: #fef9c3; border-left: 4px solid #eab308; padding: 10px 14px; border-radius: 4px; font-size: 13px; color: #713f12; margin: 12px 0; }
+
+        /* Créditos */
+        .credits { text-align: center; padding-top: 40px; }
+        .credits h2 { font-size: 22px; margin-bottom: 24px; border-bottom: 2px solid #2563eb; padding-bottom: 8px; }
+        .credits p { color: #555; line-height: 1.8; }
+        .credits a { color: #2563eb; text-decoration: none; }
+
+        @media print {
+            body { background: white; }
+            .page { box-shadow: none; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Portada -->
+<div class="page cover">
+    <div class="line"></div>
+    <h1>Dockerdesktop</h1>
+    <p class="subtitle">Panel de monitorización de contenedores Docker via red local</p>
+    <span class="dev-badge">DEV 1</span>
+    <div class="meta">
+        <span>Rama: <strong>main</strong></span>
+        <span>Repositorio: <strong>HShira101/Dockerdesktop</strong></span>
+        <span>Fecha: <strong>Abril 2026</strong></span>
+        <span>Autor: <strong>Javier Navarro · Shira</strong></span>
+    </div>
+    <div class="line"></div>
+</div>
+
+<!-- Índice -->
+<div class="page">
+    <div class="toc section">
+        <h2>Índice</h2>
+        <ol>
+            <li>Detalle de versión <span>3</span></li>
+            <li class="sub">1.1 Rama de desarrollo</li>
+            <li class="sub">1.2 Especificaciones técnicas</li>
+            <li class="sub">1.3 Cambios respecto a versión anterior</li>
+            <li>Instalación <span>4</span></li>
+            <li class="sub">2.1 Requisitos — Windows</li>
+            <li class="sub">2.2 Requisitos — Linux / Raspberry Pi</li>
+            <li class="sub">2.3 Pasos — Windows</li>
+            <li class="sub">2.4 Pasos — Linux / Raspberry Pi</li>
+            <li>Funcionalidad <span>5</span></li>
+            <li>Créditos <span>6</span></li>
+        </ol>
+    </div>
+</div>
+
+<!-- Detalle de versión -->
+<div class="page">
+    <div class="section">
+        <h2>1. Detalle de versión</h2>
+
+        <h3>1.1 Rama de desarrollo</h3>
+        <div class="note">
+            Versión DEV 1 — rama <strong>main</strong>. Sin ramas de versión por el momento.
+            Se crearán ramas dedicadas a partir de la versión Alpha cuando el esqueleto esté productivo.
+        </div>
+
+        <h3>1.2 Especificaciones técnicas</h3>
+        <table>
+            <tr><th>Software</th><th>Versión</th><th>Rol</th></tr>
+            <tr><td>PHP</td><td>8.2</td><td>Lenguaje backend</td></tr>
+            <tr><td>Laravel</td><td>12</td><td>Framework web</td></tr>
+            <tr><td>Apache</td><td>2.4</td><td>Servidor HTTP</td></tr>
+            <tr><td>SQLite</td><td>3</td><td>Base de datos</td></tr>
+            <tr><td>Vite</td><td>6</td><td>Compilación de assets</td></tr>
+            <tr><td>Node.js</td><td>LTS</td><td>Entorno de build frontend</td></tr>
+            <tr><td>Docker</td><td>Latest</td><td>Contenerización y despliegue</td></tr>
+        </table>
+
+        <h3>1.3 Cambios respecto a versión anterior</h3>
+        <p>Primera versión de desarrollo — sin versión previa.</p>
+        <ul>
+            <li>Estructura base Laravel 12 con Apache y SQLite</li>
+            <li>DockerController: listado de contenedores vía <code>docker ps -a</code></li>
+            <li>Assets compilados con Vite en el build de la imagen</li>
+            <li>Migraciones ejecutadas automáticamente en el build</li>
+            <li>Compose.yml con volúmenes diferenciados para desarrollo y producción</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Instalación -->
+<div class="page">
+    <div class="section">
+        <h2>2. Instalación</h2>
+
+        <h3>2.1 Requisitos — Windows</h3>
+        <ul>
+            <li>Docker Desktop instalado y en ejecución</li>
+            <li>Git</li>
+        </ul>
+
+        <h3>2.2 Requisitos — Linux / Raspberry Pi</h3>
+        <ul>
+            <li>Docker Engine (<code>docker</code> y <code>docker compose</code>)</li>
+            <li>Git</li>
+            <li>Usuario con permisos sobre el socket Docker (grupo <code>docker</code>)</li>
+        </ul>
+
+        <h3>2.3 Pasos — Windows (desarrollo)</h3>
+        <pre>git clone https://github.com/HShira101/Dockerdesktop.git
+cd Dockerdesktop
+docker compose up --build</pre>
+        <p>Acceder en <code>http://localhost:10000</code>.</p>
+        <div class="note">El socket de Docker en Windows es <code>//./pipe/docker_engine</code> — ajustar en <code>Compose.yml</code> si se necesita acceso al daemon.</div>
+
+        <h3>2.4 Pasos — Linux / Raspberry Pi (producción)</h3>
+        <pre>git clone https://github.com/HShira101/Dockerdesktop.git
+cd Dockerdesktop</pre>
+        <p>Editar <code>Compose.yml</code>: comentar el volumen de desarrollo y descomentar el socket:</p>
+        <pre># - .:/var/www/html
+- /var/run/docker.sock:/var/run/docker.sock</pre>
+        <pre>docker compose up --build -d</pre>
+        <p>Acceder desde la red local en <code>http://&lt;IP-RASPBERRY&gt;:10000</code>.</p>
+    </div>
+</div>
+
+<!-- Funcionalidad -->
+<div class="page">
+    <div class="section">
+        <h2>3. Funcionalidad</h2>
+
+        <h3>¿Cómo funciona?</h3>
+        <p>
+            Dockerdesktop es una interfaz web ligera desplegada en un contenedor Docker sobre una Raspberry Pi.
+            Permite visualizar en tiempo real los contenedores Docker que están corriendo en el host,
+            accediendo desde cualquier dispositivo de la red local.
+        </p>
+
+        <h3>Flujo de datos</h3>
+        <ol>
+            <li>El usuario accede a <code>IP-RASPBERRY:10000</code> desde el navegador.</li>
+            <li>Laravel recibe la petición en la ruta <code>GET /</code>.</li>
+            <li><code>DockerController</code> ejecuta <code>docker ps -a --format "json"</code> usando el socket montado.</li>
+            <li>Parsea la respuesta línea a línea (cada línea es un objeto JSON independiente).</li>
+            <li>Devuelve a la vista: <code>nombre</code>, <code>estado</code> e <code>id</code> de cada contenedor.</li>
+        </ol>
+
+        <h3>Ficheros clave</h3>
+        <table>
+            <tr><th>Fichero</th><th>Rol</th></tr>
+            <tr><td><code>DockerController.php</code></td><td>Lógica principal — llama a <code>docker ps -a</code></td></tr>
+            <tr><td><code>contenedores.blade.php</code></td><td>Vista principal</td></tr>
+            <tr><td><code>Layouts/app.blade.php</code></td><td>Layout base</td></tr>
+            <tr><td><code>routes/web.php</code></td><td>Una sola ruta: GET /</td></tr>
+            <tr><td><code>Dockerfile</code></td><td>Build de la imagen</td></tr>
+            <tr><td><code>Compose.yml</code></td><td>Orquestación y volúmenes</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- Créditos -->
+<div class="page">
+    <div class="credits">
+        <h2>4. Créditos</h2>
+        <br>
+        <p>Desarrollado por <strong>Javier Navarro</strong> · <em>Shira</em></p>
+        <br>
+        <p><a href="https://github.com/HShira101">github.com/HShira101</a></p>
+        <p><a href="https://github.com/HShira101/Dockerdesktop">github.com/HShira101/Dockerdesktop</a></p>
+        <br><br>
+        <h3>Software utilizado</h3>
+        <br>
+        <p>
+            <span class="badge badge-blue">Laravel 12</span>
+            <span class="badge badge-blue">PHP 8.2</span>
+            <span class="badge badge-blue">Apache</span>
+            <span class="badge badge-green">SQLite</span>
+            <span class="badge badge-green">Vite</span>
+            <span class="badge badge-green">Node.js</span>
+            <span class="badge badge-blue">Docker</span>
+        </p>
+        <br><br>
+        <p style="color:#aaa; font-size:12px;">Generado con Claude Code · Anthropic</p>
+    </div>
+</div>
+
+</body>
+</html>

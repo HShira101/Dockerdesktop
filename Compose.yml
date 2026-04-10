@@ -9,6 +9,14 @@ services:
     ports:
       - "10000:80"
     volumes:
-      #- .:/var/www/html
-      - /var/run/docker.sock:/var/run/docker.sock
+      - .:/var/www/html                                         # [DESARROLLO] monta el código del host en el contenedor — comentar en la Raspberry
+      - vendor_data:/var/www/html/vendor                        # [DESARROLLO] protege el vendor/ generado en el build (evita que el montaje lo borre)
+      - db_data:/var/www/html/database                          # [DESARROLLO] protege el database.sqlite generado en el build (evita que el montaje lo borre)
+      - build_data:/var/www/html/public/build                   # [DESARROLLO] protege los assets compilados por Vite en el build (evita que el montaje lo borre)
+      - /var/run/docker.sock:/var/run/docker.sock              # [PRODUCCIÓN] necesario en la Raspberry para consultar sus contenedores vía red local
     restart: unless-stopped
+
+volumes:
+  vendor_data:
+  db_data:
+  build_data:

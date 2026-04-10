@@ -159,3 +159,42 @@ header {
     /*- Flexbox y centrado de contenido-*/
     flex flex-col;
 }
+
+#notificacion {
+    @apply
+    px-10 py-6
+    rounded-2xl shadow-2xl
+    text-white text-2xl font-bold;
+}
+
+.notif-mensaje {
+    @apply
+    px-10 py-6
+    rounded-2xl shadow-2xl
+    text-white text-2xl font-bold;
+}
+
+.notif-encendido { @apply bg-green-500; }
+.notif-apagado   { @apply bg-red-500; }
+.notif-error     { @apply bg-yellow-500; }
+
+.prendido-contenedor { @apply bg-green-500/20; }
+.apagado-contenedor  { @apply bg-red-500/20; }
+.error-contenedor    { @apply bg-yellow-500/20; }
+
+.boton-tarjeta {
+    @apply
+    text-white text-sm font-semibold
+    /* Ocupa todo el ancho del contenedor */
+    w-full
+    /* Bordes redondeados */
+    rounded-lg
+    /* Transición suave */
+    transition-all duration-200
+    /* Cursor pointer */
+    cursor-pointer
+    /* Hover sutil: oscurece ligeramente el fondo */
+    hover:brightness-90
+    /* Click: más oscuro */
+    active:brightness-75;
+}

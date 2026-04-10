@@ -30,3 +30,7 @@ auth.json
 # Mac/Windows
 .DS_Store
 Thumbs.db
+
+
+.gitignore
+CLAUDE.md
