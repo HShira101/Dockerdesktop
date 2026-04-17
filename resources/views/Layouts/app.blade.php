@@ -23,7 +23,7 @@
                             d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                     </svg>
                 </div>
-                <span class="text-xl font-bold text-white tracking-wide">Panel</span>
+                <span class="text-sm text-sky-300 font-medium">{{ Auth::user()->alias ?? Auth::user()->nombre }}</span>
             </div>
         </div>
         <!-- Fin del contendor del Logo -->
@@ -90,6 +90,14 @@
         <!-- Barra Superior (Topbar) / Título -->
         <header>
             <h1>Monitor Docker</h1>
+            <div class="flex items-center gap-4">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="text-sm font-semibold text-white bg-red-600/70 hover:bg-red-600/90 border border-red-800 px-3 py-1.5 rounded-lg shadow-inner transition-colors duration-200 cursor-pointer">
+                        Cerrar sesión
+                    </button>
+                </form>
+            </div>
         </header>
 
         <!-- Contenedor del Dashboard (Scroll Independiente) -->

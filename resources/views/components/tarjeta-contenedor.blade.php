@@ -8,7 +8,9 @@
     <div class="encabezado-tarjeta">
         <h1 class="w-1/2 truncate">{{ $nombre }}</h1>
         <div class="w-1/4">
-            @if ($estado == 'running')
+            @if ($nombre === 'Dockerlocal')
+                <button disabled class="boton-tarjeta boton-protegido">Protegido</button>
+            @elseif ($estado == 'running')
                 <form method="POST" action="/contenedor/parar">
                     @csrf
                     <input type="hidden" name="id" value="{{ $id }}">

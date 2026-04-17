@@ -171,9 +171,9 @@ header {
     pointer-events-none;
 }
 
-.prendido-contenedor { @apply bg-green-500/70; }
-.apagado-contenedor  { @apply bg-red-500/70; }
-.error-contenedor    { @apply bg-yellow-500/70; }
+.prendido-contenedor { @apply bg-green-500/25  border border-green-400/40  text-green-100; }
+.apagado-contenedor  { @apply bg-red-500/25    border border-red-400/40    text-red-100; }
+.error-contenedor    { @apply bg-yellow-500/25 border border-yellow-400/40 text-yellow-100; }
 
 .stats-widget {
     @apply mx-3 mt-4 px-4 py-4 rounded-xl
@@ -188,25 +188,78 @@ header {
 
 .boton-tarjeta {
     @apply
-    text-white text-sm font-semibold tracking-wide
+    text-sm font-semibold tracking-wide
     w-full
     py-1.5 px-3
     rounded-lg
+    border
     transition-all duration-200
     cursor-pointer
-    shadow-sm
-    hover:brightness-90
     active:scale-95 active:brightness-75;
 }
 
 .boton-iniciar {
-    @apply bg-green-600 hover:bg-green-500;
+    @apply bg-green-600/70 hover:bg-green-600/90
+    border-green-800 text-white shadow-inner;
 }
 
 .boton-detener {
-    @apply bg-red-600 hover:bg-red-500;
+    @apply bg-red-600/70 hover:bg-red-600/90
+    border-red-800 text-white shadow-inner;
+}
+
+.boton-protegido {
+    @apply bg-slate-700/70 border-slate-900
+    text-white cursor-not-allowed shadow-inner;
 }
 
 .dato-puerto {
     @apply text-blue-700 font-medium;
+}
+
+/* -- ESTILOS PARA LA PÁGINA DE LOGIN -- */
+
+.login-pagina  { @apply bg-slate-900 min-h-screen flex items-center justify-center; }
+
+.login-caja {
+    @apply w-full max-w-sm
+    bg-slate-800 rounded-2xl shadow-2xl
+    p-8;
+}
+
+.login-logo {
+    @apply flex items-center gap-3 mb-8;
+}
+
+.login-icono {
+    @apply w-10 h-10 rounded-xl
+    bg-gradient-to-tr from-blue-600 to-indigo-500
+    shadow-lg flex items-center justify-center;
+}
+
+.login-titulo { @apply text-xl font-bold text-white tracking-wide; }
+
+.login-error {
+    @apply mb-5 px-4 py-3 rounded-lg
+    bg-red-500/20 border border-red-500/40
+    text-red-300 text-sm;
+}
+
+.login-form   { @apply flex flex-col gap-5; }
+.login-campo  { @apply flex flex-col gap-1.5; }
+.login-label  { @apply text-slate-300 text-sm font-medium; }
+
+.login-input {
+    @apply bg-slate-700 border border-slate-600
+    text-white rounded-lg px-4 py-2.5 text-sm
+    placeholder-slate-400
+    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+.login-boton {
+    @apply mt-2 w-full
+    bg-blue-600 hover:bg-blue-500 active:bg-blue-700
+    text-white font-semibold
+    py-2.5 rounded-lg
+    transition-colors duration-200 cursor-pointer;
 }

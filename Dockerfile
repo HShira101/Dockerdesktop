@@ -36,7 +36,7 @@ RUN npm install && npm run build
 
 # Preparar la base de datos SQLite y ejecutar migraciones
 # (Puesto que ahora se copia el .env, artisan entenderá la conexión de SQLite)
-RUN touch database/database.sqlite && php artisan migrate --force
+RUN touch database/database.sqlite && php artisan migrate --force && php artisan db:seed --force
 
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \

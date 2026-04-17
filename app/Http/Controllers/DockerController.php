@@ -76,6 +76,11 @@ class DockerController extends Controller
         $id     = $request->input('id');     // {-- ← ID corto del contenedor --}
         $nombre = $request->input('nombre'); // {-- ← nombre para mostrar en notificación --}
 
+        // {-- ← impide apagar el propio contenedor de la aplicación --}
+        if ($nombre === 'Dockerlocal') {
+            return redirect('/')->with('notificacion', ['accion' => 'error', 'nombre' => $nombre]);
+        }
+
         $status = $this->dockerPost("/containers/{$id}/stop");
 
         // {-- ← 204 = detenido, 304 = ya estaba detenido; ambos son éxito --}
