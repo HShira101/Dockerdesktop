@@ -162,39 +162,40 @@ header {
 
 #notificacion {
     @apply
-    px-10 py-6
+    fixed top-6 left-1/2 -translate-x-1/2
+    z-50
+    px-10 py-5
     rounded-2xl shadow-2xl
-    text-white text-2xl font-bold;
+    text-white text-xl font-semibold
+    backdrop-blur-sm
+    pointer-events-none;
 }
 
-.notif-mensaje {
-    @apply
-    px-10 py-6
-    rounded-2xl shadow-2xl
-    text-white text-2xl font-bold;
-}
-
-.notif-encendido { @apply bg-green-500; }
-.notif-apagado   { @apply bg-red-500; }
-.notif-error     { @apply bg-yellow-500; }
-
-.prendido-contenedor { @apply bg-green-500/20; }
-.apagado-contenedor  { @apply bg-red-500/20; }
-.error-contenedor    { @apply bg-yellow-500/20; }
+.prendido-contenedor { @apply bg-green-500/70; }
+.apagado-contenedor  { @apply bg-red-500/70; }
+.error-contenedor    { @apply bg-yellow-500/70; }
 
 .boton-tarjeta {
     @apply
-    text-white text-sm font-semibold
-    /* Ocupa todo el ancho del contenedor */
+    text-white text-sm font-semibold tracking-wide
     w-full
-    /* Bordes redondeados */
+    py-1.5 px-3
     rounded-lg
-    /* Transición suave */
     transition-all duration-200
-    /* Cursor pointer */
     cursor-pointer
-    /* Hover sutil: oscurece ligeramente el fondo */
+    shadow-sm
     hover:brightness-90
-    /* Click: más oscuro */
-    active:brightness-75;
+    active:scale-95 active:brightness-75;
+}
+
+.boton-iniciar {
+    @apply bg-green-600 hover:bg-green-500;
+}
+
+.boton-detener {
+    @apply bg-red-600 hover:bg-red-500;
+}
+
+.dato-puerto {
+    @apply text-blue-700 font-medium;
 }

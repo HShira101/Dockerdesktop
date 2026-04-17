@@ -14,9 +14,25 @@ services:
       - db_data:/var/www/html/database                          # [DESARROLLO] protege el database.sqlite generado en el build (evita que el montaje lo borre)
       - build_data:/var/www/html/public/build                   # [DESARROLLO] protege los assets compilados por Vite en el build (evita que el montaje lo borre)
       - /var/run/docker.sock:/var/run/docker.sock              # [PRODUCCIÓN] necesario en la Raspberry para consultar sus contenedores vía red local
+    depends_on:
+      - vite
+    restart: unless-stopped
+
+  vite:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ViteDev
+    command: npm run dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/var/www/html                                         # mismo código fuente que el servicio app
+      - node_modules_data:/var/www/html/node_modules            # protege el node_modules generado en el build
     restart: unless-stopped
 
 volumes:
   vendor_data:
   db_data:
   build_data:
+  node_modules_data:

@@ -13,14 +13,14 @@
                     @csrf
                     <input type="hidden" name="id" value="{{ $id }}">
                     <input type="hidden" name="nombre" value="{{ $nombre }}">
-                    <button class="boton-tarjeta">⏹️</button>
+                    <button class="boton-tarjeta boton-detener">Detener</button>
                 </form>
             @else
                 <form method="POST" action="/contenedor/iniciar">
                     @csrf
                     <input type="hidden" name="id" value="{{ $id }}">
                     <input type="hidden" name="nombre" value="{{ $nombre }}">
-                    <button class="boton-tarjeta">▶️</button>
+                    <button class="boton-tarjeta boton-iniciar">Iniciar</button>
                 </form>
             @endif
         </div>

@@ -38,19 +38,35 @@ class DockerController extends Controller
 
         return view('contenedores', compact('lista'));
     }
+    // {---- Llama a la Docker Engine API por el socket Unix usando curl de PHP directamente ----}
+    private function dockerPost(string $endpoint): int
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_UNIX_SOCKET_PATH, '/var/run/docker.sock'); // {-- ← usa el socket, no TCP --}
+        curl_setopt($ch, CURLOPT_URL,           "http://localhost/v1.44{$endpoint}");
+        curl_setopt($ch, CURLOPT_POST,          true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,    '');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_exec($ch);
+        $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return $status;
+    }
+    // {---- Fin Llama a la Docker Engine API ----}
+
     // {---- Inicia un contenedor (recibe id y nombre desde el formulario de la tarjeta) ----}
     public function iniciar(Request $request)
     {
         $id     = $request->input('id');     // {-- ← ID corto del contenedor --}
         $nombre = $request->input('nombre'); // {-- ← nombre para mostrar en notificación --}
 
-        $resultado = Process::run("docker start $id"); // {-- ← ejecuta docker start en el host --}
+        $status = $this->dockerPost("/containers/{$id}/start");
 
-        if ($resultado->successful()) {
-            return redirect('/')->with('notificacion', ['accion' => 'encendido', 'nombre' => $nombre]);
-        }
-
-        return redirect('/')->with('notificacion', ['accion' => 'error', 'nombre' => $nombre]);
+        // {-- ← 204 = arrancado, 304 = ya estaba corriendo; ambos son éxito --}
+        return redirect('/')->with('notificacion', [
+            'accion' => in_array($status, [204, 304]) ? 'encendido' : 'error',
+            'nombre' => $nombre,
+        ]);
     }
     // {---- Fin Inicia un contenedor ----}
 
@@ -60,13 +76,13 @@ class DockerController extends Controller
         $id     = $request->input('id');     // {-- ← ID corto del contenedor --}
         $nombre = $request->input('nombre'); // {-- ← nombre para mostrar en notificación --}
 
-        $resultado = Process::run("docker stop $id"); // {-- ← ejecuta docker stop en el host --}
+        $status = $this->dockerPost("/containers/{$id}/stop");
 
-        if ($resultado->successful()) {
-            return redirect('/')->with('notificacion', ['accion' => 'apagado', 'nombre' => $nombre]);
-        }
-
-        return redirect('/')->with('notificacion', ['accion' => 'error', 'nombre' => $nombre]);
+        // {-- ← 204 = detenido, 304 = ya estaba detenido; ambos son éxito --}
+        return redirect('/')->with('notificacion', [
+            'accion' => in_array($status, [204, 304]) ? 'apagado' : 'error',
+            'nombre' => $nombre,
+        ]);
     }
     // {---- Fin Para un contenedor ----}
 
