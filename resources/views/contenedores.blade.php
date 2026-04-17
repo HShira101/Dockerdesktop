@@ -1,31 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(session('notificacion'))
-        @php
-            $n     = session('notificacion');
-            $clase = match($n['accion']) {
-                'encendido' => 'prendido-contenedor',
-                'apagado'   => 'apagado-contenedor',
-                default     => 'error-contenedor',
-            };
-            $texto = match($n['accion']) {
-                'encendido' => '✅ Se ha encendido: ',
-                'apagado'   => '🛑 Se ha apagado: ',
-                default     => '⚠️ Error al operar: ',
-            } . $n['nombre'];
-        @endphp
-        <div id="notificacion" class="{{ $clase }}">{{ $texto }}</div>
-        <script>
-            setTimeout(() => {
-                const el = document.getElementById('notificacion');
-                el.style.transition = 'opacity 0.4s';
-                el.style.opacity = '0';
-                setTimeout(() => el.remove(), 400);
-            }, 2000);
-        </script>
-    @endif
-    <h1>Contenedores</h1>
+<h1>Contenedores</h1>
     <div class="caja-de-tarjetas">
         @foreach ($lista as $contenedor)
             <x-tarjeta-contenedor :nombre="$contenedor['nombre']" :estado="$contenedor['estado']" :id="$contenedor['id']">

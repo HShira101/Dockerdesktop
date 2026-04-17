@@ -19,6 +19,7 @@ class CheckSession
         // {-- ← cierra sesión si lleva más de 10 min sin actividad --}
         $ultimaActividad = session('last_activity');
         if ($ultimaActividad && (time() - $ultimaActividad) > self::INACTIVIDAD_MAX) {
+            Auth::user()?->update(['session_token' => null]); // {-- ← limpia token para que el indicador muestre inactivo --}
             return $this->cerrarSesion($request, 'Sesión cerrada por inactividad.');
         }
 
