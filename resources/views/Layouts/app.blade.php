@@ -28,14 +28,61 @@
         </div>
         <!-- Fin del contendor del Logo -->
 
-        <!-- Navegador lateral -->
-        <nav>
-            <ul>
-                <li><button class="boton-nav">Contenedores</button></li>
-                <li><button class="boton-nav">Opciones</button></li>
-            </ul>
-        </nav>
+        <!-- Bloque de consumo Docker -->
+        <div class="stats-widget">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-sky-200 text-xs font-semibold uppercase tracking-widest">Consumo</span>
+                <button id="btn-refresh-stats" class="boton-refresh-stats" title="Actualizar">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="stat-fila">
+                <span class="stat-label">CPU</span>
+                <span id="stat-cpu" class="stat-valor">—</span>
+            </div>
+            <div class="stat-fila">
+                <span class="stat-label">RAM</span>
+                <span id="stat-ram" class="stat-valor">—</span>
+            </div>
+            <p id="stat-tiempo" class="stat-tiempo">—</p>
+        </div>
+        <!-- Fin bloque de consumo Docker -->
     </aside>
+
+    <script>
+        // Guarda cuándo fue la última actualización para calcular el tiempo transcurrido
+        let lastUpdate = null;
+
+        // Pide los stats al servidor y actualiza el DOM
+        async function fetchStats() {
+            try {
+                const data = await fetch('/docker/stats').then(r => r.json());
+                document.getElementById('stat-cpu').textContent = data.cpu + '%';
+                document.getElementById('stat-ram').textContent = data.used_gb + ' GB / ' + data.total_gb + ' GB';
+                lastUpdate = Date.now();
+                updateTimer();
+            } catch (e) {
+                document.getElementById('stat-cpu').textContent = 'error';
+            }
+        }
+
+        // Actualiza el texto "Información actualizada hace: X min" en el navegador sin llamar al servidor
+        function updateTimer() {
+            if (!lastUpdate) return;
+            const mins = Math.floor((Date.now() - lastUpdate) / 60000);
+            const txt  = mins === 0 ? 'ahora mismo' : 'hace ' + mins + ' min';
+            document.getElementById('stat-tiempo').textContent = 'Actualizado ' + txt;
+        }
+
+        document.getElementById('btn-refresh-stats').addEventListener('click', fetchStats);
+
+        fetchStats();                          // carga al iniciar la página
+        setInterval(fetchStats,  5 * 60 * 1000); // refresca datos cada 5 min
+        setInterval(updateTimer, 60 * 1000);     // actualiza el contador cada 1 min
+    </script>
 
     <!-- Área Principal Derecha -->
     <main class="flex-1 flex flex-col h-screen overflow-hidden">

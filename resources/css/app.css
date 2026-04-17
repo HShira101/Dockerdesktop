@@ -175,6 +175,17 @@ header {
 .apagado-contenedor  { @apply bg-red-500/70; }
 .error-contenedor    { @apply bg-yellow-500/70; }
 
+.stats-widget {
+    @apply mx-3 mt-4 px-4 py-4 rounded-xl
+    bg-sky-900/50 border border-sky-700/40;
+}
+
+.stat-fila  { @apply flex justify-between items-center py-1; }
+.stat-label { @apply text-sky-300 text-xs; }
+.stat-valor { @apply text-white text-xs font-mono font-semibold; }
+.stat-tiempo { @apply text-sky-400/60 text-xs mt-3 text-center; }
+.boton-refresh-stats { @apply text-sky-300 hover:text-white transition-colors cursor-pointer; }
+
 .boton-tarjeta {
     @apply
     text-white text-sm font-semibold tracking-wide

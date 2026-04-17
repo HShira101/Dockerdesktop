@@ -86,6 +86,55 @@ class DockerController extends Controller
     }
     // {---- Fin Para un contenedor ----}
 
+    // {---- Devuelve uso de CPU y RAM de Docker en JSON ----}
+    public function stats()
+    {
+        $result = Process::run('docker stats --no-stream --format "{{json .}}"');
+        $lines  = array_filter(explode("\n", trim($result->output())));
+
+        $cpu        = 0.0;
+        $usedBytes  = 0;
+        $totalBytes = 0;
+
+        foreach ($lines as $line) {
+            $d = json_decode($line, true);
+            if (!$d) continue;
+
+            $cpu += (float) str_replace('%', '', $d['CPUPerc'] ?? '0');
+
+            $parts = explode(' / ', $d['MemUsage'] ?? '0B / 0B');
+            $usedBytes  += $this->parseMemBytes($parts[0] ?? '0B');
+            if ($totalBytes === 0) {
+                $totalBytes = $this->parseMemBytes($parts[1] ?? '0B');
+            }
+        }
+
+        return response()->json([
+            'cpu'      => round($cpu, 1),
+            'used_gb'  => round($usedBytes  / 1073741824, 2),
+            'total_gb' => round($totalBytes / 1073741824, 2),
+        ]);
+    }
+    // {---- Fin Devuelve uso de CPU y RAM ----}
+
+    // {---- Convierte string de memoria Docker a bytes ----}
+    private function parseMemBytes(string $str): int
+    {
+        $str   = trim($str);
+        $units = [
+            'TiB' => 1099511627776, 'GiB' => 1073741824, 'MiB' => 1048576, 'KiB' => 1024,
+            'TB'  => 1000000000000, 'GB'  => 1000000000,  'MB'  => 1000000, 'KB'  => 1000,
+            'B'   => 1,
+        ];
+        foreach ($units as $unit => $mul) {
+            if (str_ends_with($str, $unit)) {
+                return (int) ((float) substr($str, 0, -strlen($unit)) * $mul);
+            }
+        }
+        return 0;
+    }
+    // {---- Fin Convierte memoria ----}
+
     public function obtener_contenedores()
     { //Función para solicitar lista de contenedores.
         // Pide una lista de contendores a docker y otorga un formato JSON con los contenedores.
