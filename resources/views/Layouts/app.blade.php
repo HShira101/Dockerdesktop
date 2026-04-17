@@ -51,17 +51,24 @@
         </div>
         <!-- Fin bloque de consumo Docker -->
 
-        <!-- Botón de navegación: Usuarios -->
-        <div class="px-3 mt-3">
-            <a href="/usuarios" class="boton-tarjeta boton-protegido flex items-center gap-2 py-2 px-4 text-sm">
+        <!-- Navegación lateral -->
+        <nav class="flex flex-col px-3 mt-4 gap-1">
+            <a href="/" class="boton-nav flex items-center justify-center gap-2 py-2.5 text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 12H3l9-9 9 9h-2M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                </svg>
+                Contenedores
+            </a>
+            <a href="/usuarios" class="boton-nav flex items-center justify-center gap-2 py-2.5 text-sm">
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M17 20h5v-2a4 4 0 00-5-5M9 20H4v-2a4 4 0 015-5m6-7a4 4 0 11-8 0 4 4 0 018 0z"/>
                 </svg>
                 Usuarios
             </a>
-        </div>
-        <!-- Fin botón Usuarios -->
+        </nav>
+        <!-- Fin navegación lateral -->
     </aside>
 
     <script>

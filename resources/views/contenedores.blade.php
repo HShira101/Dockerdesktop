@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Contenedores</h1>
+<h1 class="titulo-pagina">Contenedores</h1>
     <div class="caja-de-tarjetas">
         @foreach ($lista as $contenedor)
             <x-tarjeta-contenedor :nombre="$contenedor['nombre']" :estado="$contenedor['estado']" :id="$contenedor['id']">

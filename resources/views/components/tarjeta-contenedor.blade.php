@@ -7,26 +7,26 @@
 <div class="tarjeta">
     <div class="encabezado-tarjeta">
         <h1 class="w-1/2 truncate">{{ $nombre }}</h1>
-        <div class="w-1/4">
+        <div class="celda-tarjeta">
             @if ($nombre === 'Dockerlocal')
-                <button disabled class="boton-tarjeta boton-protegido">Protegido</button>
+                <button disabled class="boton-tarjeta boton-protegido w-full">Protegido</button>
             @elseif ($estado == 'running')
                 <form method="POST" action="/contenedor/parar">
                     @csrf
                     <input type="hidden" name="id" value="{{ $id }}">
                     <input type="hidden" name="nombre" value="{{ $nombre }}">
-                    <button class="boton-tarjeta boton-detener">Detener</button>
+                    <button class="boton-tarjeta boton-detener w-full">Detener</button>
                 </form>
             @else
                 <form method="POST" action="/contenedor/iniciar">
                     @csrf
                     <input type="hidden" name="id" value="{{ $id }}">
                     <input type="hidden" name="nombre" value="{{ $nombre }}">
-                    <button class="boton-tarjeta boton-iniciar">Iniciar</button>
+                    <button class="boton-tarjeta boton-iniciar w-full">Iniciar</button>
                 </form>
             @endif
         </div>
-        <div class="w-1/4 flex justify-center">
+        <div class="celda-tarjeta">
             @if ($estado == 'running')
                 <p class="w-3 h-3 rounded-full bg-green-500"></p>
             @else

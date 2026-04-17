@@ -55,28 +55,12 @@ aside {
 
 .boton-nav {
     @apply
-    /*Color de fondo*/
-    bg-sky-900
-    /*Color del texto*/
-    text-white
-    /*Relleno o padding en el eje X (izquierda y derecha)*/
-    px-6
-    /*Relleno o padding en el eje Y (arriba y abajo)*/
-    py-6
-    /*Transiciones suaves*/
-    transition-all duration-300
-    /*Sombra*/
-    shadow-2xl z-20
-    /* Ocupa todo el ancho */
-    w-full
-    /*- Agrega margen inferior y superior -*/
-    mb-2 mt-2
-    /*- Agrega suavizado del botón -*/
-    rounded-lg
-    /*- Agrega color al pasar por encima -*/
-    hover:bg-sky-700
-    /*- Agrega color al hacer click -*/
-    active:bg-sky-600;
+    bg-sky-900 hover:bg-sky-700 active:bg-sky-600
+    text-white font-semibold text-sm
+    w-full px-4 py-2.5
+    rounded-lg border border-sky-800/60
+    transition-all duration-200
+    cursor-pointer;
 }
 
 header {
@@ -152,6 +136,10 @@ header {
     bg-slate-50;
 }
 
+.celda-tarjeta {
+    @apply w-1/4 flex items-center justify-center;
+}
+
 .cuerpo-tarjeta {
     @apply
     /* Padding en todos lados */
@@ -189,7 +177,6 @@ header {
 .boton-tarjeta {
     @apply
     text-sm font-semibold tracking-wide
-    w-full
     py-1.5 px-3
     rounded-lg
     border
@@ -197,6 +184,8 @@ header {
     cursor-pointer
     active:scale-95 active:brightness-75;
 }
+
+.titulo-pagina { @apply text-2xl font-bold text-slate-800 mb-1; }
 
 .boton-iniciar {
     @apply bg-green-600/70 hover:bg-green-600/90
@@ -267,9 +256,10 @@ header {
 /* -- MODALES -- */
 
 .modal-overlay {
+    display: none;
     @apply fixed inset-0 z-50
     bg-slate-900/60 backdrop-blur-sm
-    flex items-center justify-center;
+    items-center justify-center;
 }
 
 .modal-caja {
